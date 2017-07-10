@@ -17,7 +17,12 @@ return [
             'class' => 'api\modules\v1\Module'
         ]
     ],
-    'components' => [        
+    'components' => [     
+        'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ],   
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => false,
@@ -37,18 +42,20 @@ return [
             'showScriptName' => false,
             'rules' => [
                 [
+                    'pluralize' => false,
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => 'v1/country',
                     'tokens' => [
                         '{id}' => '<id:\\w+>'
+                    ],
+                    'extraPatterns' => [
+                        'GET ambil' => 'ambil',
                     ]
                     
-                ]
-            ],        
+                ],
+
+            ],
         ]
     ],
     'params' => $params,
 ];
-
-
-

@@ -11,7 +11,17 @@ use yii\rest\ActiveController;
  */
 class CountryController extends ActiveController
 {
-    public $modelClass = 'api\modules\v1\models\Country';    
+    public $modelClass = 'api\modules\v1\models\Country';
+
+    function actionIndex() {
+    	$obj = [
+    		'id' => 1,
+    		'nama' => 'test'
+    	]; 
+    	echo json_encode($obj);
+
+    	exit();
+    }    
 }
 
 
