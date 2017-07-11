@@ -22,7 +22,7 @@ return [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
-        ],   
+        ],  
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => false,
@@ -45,15 +45,11 @@ return [
                     'pluralize' => false,
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => 'v1/country',
-                    'tokens' => [
-                        '{id}' => '<id:\\w+>'
-                    ],
                     'extraPatterns' => [
-                        'GET ambil' => 'ambil',
-                    ]
+                        'POST search' => 'search',
+                    ], 
                     
                 ],
-
             ],
         ]
     ],

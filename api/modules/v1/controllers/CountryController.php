@@ -13,14 +13,31 @@ class CountryController extends ActiveController
 {
     public $modelClass = 'api\modules\v1\models\Country';
 
-    function actionIndex() {
-    	$obj = [
-    		'id' => 1,
-    		'nama' => 'test'
-    	]; 
-    	echo json_encode($obj);
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => \yii\filters\ContentNegotiator::className(),
+                'only' => ['index', 'view'],
+                'formats' => [
+                    'application/json' => \yii\web\Response::FORMAT_JSON,
+                ],
+            ],
+        ];
+    }
 
-    	exit();
+    function actionSearch() {
+
+    	$request = \Yii::$app->request->post();
+
+    	if($request) {
+    		$query = $this->modelClass::find()
+    		->where(['like', 'name', $request['name']])
+    		->asArray()
+    		->all();
+
+    		echo json_encode($query);
+    	}
     }    
 }
 
